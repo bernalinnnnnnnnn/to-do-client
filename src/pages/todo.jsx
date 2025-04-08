@@ -18,8 +18,6 @@ function Todo() {
     const [editingListId, setEditingListId] = useState(null);
     const [editingListText, setEditingListText] = useState("");
 
-    const apiUrl = import.meta.env.VITE_ENDPOINT_URL;
-
     useEffect(() => {
         fetchTitles();
     }, []);
