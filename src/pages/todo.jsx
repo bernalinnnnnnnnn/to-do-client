@@ -28,7 +28,7 @@ function Todo() {
 
     const fetchTitles = async () => {
         try {
-            const response = await axios.get("http://localhost:3000/get-titles");
+            const response = await axios.get(`${process.env.REACT_APP_ENDPOINT_URL}/get-titles`);
             setTitles(response.data.titles);
         } catch (error) {
             console.error("Error fetching titles:", error);
@@ -41,7 +41,7 @@ function Todo() {
 
         for (const title of titles) {
             try {
-                const response = await axios.get(`http://localhost:3000/get-lists/${title.id}`);
+                const response = await axios.get(`${process.env.ENDPOINT_URL}/get-lists/${title.id}`);
                 if (response.data && response.data.lists) {
                     const allCompleted = response.data.lists.every(task => task.status === true);
 
@@ -68,7 +68,7 @@ function Todo() {
 
         setIsLoading(true);
         try {
-            const response = await axios.get(`http://localhost:3000/get-lists/${id}`);
+            const response = await axios.get(`${process.env.ENDPOINT_URL}/get-lists/${id}`);
             console.log("API response:", response.data);
 
             if (response.data && response.data.lists) {
@@ -98,12 +98,12 @@ function Todo() {
     const handleCheckboxChange = async (titleId, taskId, currentStatus) => {
         try {
             // Update task status in the backend
-            await axios.put(`http://localhost:3000/update-task-status/${taskId}`, {
+            await axios.put(`${process.env.ENDPOINT_URL}/update-task-status/${taskId}`, {
                 status: !currentStatus
             });
 
             // Refresh lists for this title to get updated data
-            const response = await axios.get(`http://localhost:3000/get-lists/${titleId}`);
+            const response = await axios.get(`${process.env.ENDPOINT_URL}/get-lists/${titleId}`);
             
             if (response.data && response.data.lists) {
                 // Get updated lists and separate into ongoing and completed
@@ -144,7 +144,7 @@ function Todo() {
     const saveEditedTitle = async (e) => {
         e.stopPropagation();
         try {
-            await axios.put(`http://localhost:3000/update-title/${editingTitleId}`, {
+            await axios.put(`${process.env.ENDPOINT_URL}/update-title/${editingTitleId}`, {
                 title: editingTitleText
             });
             fetchTitles();
@@ -163,12 +163,12 @@ function Todo() {
     const saveEditedList = async (titleId, e) => {
         e.stopPropagation();
         try {
-            await axios.put(`http://localhost:3000/update-list/${editingListId}`, {
+            await axios.put(`${process.env.ENDPOINT_URL}/update-list/${editingListId}`, {
                 list_desc: editingListText
             });
             
             // Refresh the list for this title
-            const response = await axios.get(`http://localhost:3000/get-lists/${titleId}`);
+            const response = await axios.get(`${process.env.ENDPOINT_URL}/get-lists/${titleId}`);
             if (response.data && response.data.lists) {
                 const ongoing = response.data.lists.filter((task) => task.status === false);
                 const completed = response.data.lists.filter((task) => task.status === true);
@@ -194,7 +194,7 @@ function Todo() {
         e.stopPropagation();
         if (window.confirm("Are you sure you want to delete this task and all its items?")) {
             try {
-                await axios.delete(`http://localhost:3000/delete-title/${titleId}`);
+                await axios.delete(`${process.env.ENDPOINT_URL}/delete-title/${titleId}`);
                 fetchTitles();
                 if (expandedId === titleId) {
                     setExpandedId(null);
@@ -209,7 +209,7 @@ function Todo() {
         e.stopPropagation();
         if (window.confirm("Are you sure you want to delete this item?")) {
             try {
-                await axios.delete(`http://localhost:3000/delete-list/${listId}`);
+                await axios.delete(`${process.env.ENDPOINT_URL}/delete-list/${listId}`);
                 
                 // Refresh the list for this title
                 const response = await axios.get(`http://localhost:3000/get-lists/${titleId}`);

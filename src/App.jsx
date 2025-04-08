@@ -9,7 +9,7 @@ function App() {
   const [showError, setShowError] = useState(false);
 
   const handleLogin = async () => {
-    await axios.post('http://localhost:3000/check-user', { username, password })
+    await axios.post(`${process.env.REACT_APP_ENDPOINT_URL}/check-user`, { username, password })
       .then((response) => {
         if(response.data.exist) {
           setShowError(false);

@@ -24,7 +24,7 @@ export default function AddModal({ hide, onTaskAdded }) {
         try {
             const username = "Admin"; // Replace with actual username if needed
 
-            const response = await axios.post("http://localhost:3000/add-to-do", {
+            const response = await axios.post(`${process.env.ENDPOINT_URL}/add-to-do`, {
                 username,
                 title,
                 lists: [{ list_desc: tasks }],
