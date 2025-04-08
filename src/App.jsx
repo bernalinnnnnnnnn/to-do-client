@@ -11,18 +11,20 @@ function App() {
   const apiUrl = import.meta.env.VITE_ENDPOINT_URL;
 
   const handleLogin = async () => {
-    await axios.post(`${apiUrl}/check-user`, { username, password })
-      .then((response) => {
-        if(response.data.exist) {
-          setShowError(false);
-          navigate('/todo');
-        }
-        else {
-          setShowError(true);
-        }
-      });
-  }
-  
+    try {
+      const response = await axios.post(`${apiUrl}/check-user`, { username, password });
+      if (response.data.exist) {
+        navigate('/todo');
+      } else {
+        setShowError(true);
+      }
+    } catch (error) {
+      console.error("Login failed:", error);
+      setShowError(true);
+    }
+  };
+
+
   return (
     <div className="w-screen h-screen flex justify-center items-center bg-gradient-to-br from-purple-200 to-purple-400">
       <div className="w-96 p-8 bg-white rounded-2xl shadow-2xl border-4 border-pink-400">
