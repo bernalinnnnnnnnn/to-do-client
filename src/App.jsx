@@ -8,8 +8,10 @@ function App() {
   const [password, setPassword] = useState('');
   const [showError, setShowError] = useState(false);
 
+  const apiUrl = import.meta.env.VITE_ENDPOINT_URL;
+
   const handleLogin = async () => {
-    await axios.post(`${process.env.REACT_APP_ENDPOINT_URL}/check-user`, { username, password })
+    await axios.post(`${apiUrl}/check-user`, { username, password })
       .then((response) => {
         if(response.data.exist) {
           setShowError(false);

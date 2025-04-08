@@ -6,6 +6,8 @@ export default function AddModal({ hide, onTaskAdded }) {
     const [tasks, setTasks] = useState([""]);
     const [loading, setLoading] = useState(false);
 
+    const apiUrl = import.meta.env.VITE_ENDPOINT_URL;
+
     const addTask = () => {
         setTasks([...tasks, ""]);
     };
@@ -24,7 +26,7 @@ export default function AddModal({ hide, onTaskAdded }) {
         try {
             const username = "Admin"; // Replace with actual username if needed
 
-            const response = await axios.post(`${process.env.ENDPOINT_URL}/add-to-do`, {
+            const response = await axios.post(`${apiUrl}/add-to-do`, {
                 username,
                 title,
                 lists: [{ list_desc: tasks }],
