@@ -8,7 +8,7 @@ function App() {
   const [password, setPassword] = useState('');
   const [showError, setShowError] = useState(false);
 
-  const apiUrl = import.meta.env.VITE_ENDPOINT_URL;
+  const apiUrl = import.meta.env.REACT_APP_ENDPOINT_URL;
 
   const handleLogin = async () => {
     await axios.post(`${apiUrl}/check-user`, { username, password })
