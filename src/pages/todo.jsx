@@ -3,6 +3,9 @@ import axios from "axios";
 import AddModal from "../components/AddModal";
 
 function Todo() {
+
+    const apiUrl = import.meta.env.VITE_ENDPOINT_URL;
+    
     const [titles, setTitles] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [expandedId, setExpandedId] = useState(null);

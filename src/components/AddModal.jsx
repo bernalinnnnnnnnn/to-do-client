@@ -6,6 +6,8 @@ export default function AddModal({ hide, onTaskAdded }) {
     const [tasks, setTasks] = useState([""]);
     const [loading, setLoading] = useState(false);
 
+    const apiUrl = import.meta.env.VITE_ENDPOINT_URL;
+
     const addTask = () => {
         setTasks([...tasks, ""]);
     };
