@@ -32,7 +32,7 @@ function App() {
 
         {showError && (
           <div className="bg-pink-200 text-pink-800 p-3 rounded-lg font-semibold text-center border border-pink-400 mb-4">
-            Invalid username and password, kupal.
+            Invalid username and password.
           </div>
         )}
 
@@ -44,7 +44,7 @@ function App() {
               id="username"
               className="w-full px-4 py-3 border-2 border-pink-400 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 shadow-md"
               onChange={(e) => setUsername(e.target.value)}
-              placeholder="Enter username"
+              placeholder="Enter (berna) "
             />
           </div>
 
@@ -55,7 +55,7 @@ function App() {
               id="password"
               className="w-full px-4 py-3 border-2 border-pink-400 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 shadow-md"
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter password"
+              placeholder="Enter (143)"
             />
           </div>
 
