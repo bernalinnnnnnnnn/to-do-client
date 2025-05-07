@@ -13,42 +13,60 @@ function App() {
   const handleLogin = async () => {
     await axios.post(`${apiUrl}/check-user`, { username, password })
       .then((response) => {
-        if (response.data === true) {
-          navigate("/todo");
-        } else {
+        if(response.data.exist) {
+          setShowError(false);
+          navigate('/todo');
+        }
+        else {
           setShowError(true);
         }
-      })
-      .catch(() => setShowError(true));
-  };
-
+      });
+  }
+  
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
-      <div className="bg-white p-6 rounded-xl shadow-lg w-full max-w-sm">
-        <h1 className="text-xl font-semibold mb-4 text-center">Login</h1>
+    <div className="w-screen h-screen flex justify-center items-center bg-gradient-to-br from-purple-200 to-purple-400">
+      <div className="w-96 p-8 bg-white rounded-2xl shadow-2xl border-4 border-pink-400">
+        <h1 className="text-4xl font-extrabold text-center text-purple-700 mb-6 drop-shadow-lg font-serif">
+          LOGIN
+        </h1>
+
         {showError && (
-          <div className="mb-2 text-sm text-red-500">Invalid credentials</div>
+          <div className="bg-pink-200 text-pink-800 p-3 rounded-lg font-semibold text-center border border-pink-400 mb-4">
+            Invalid username and password.
+          </div>
         )}
-        <input
-          type="text"
-          placeholder="Username"
-          className="w-full p-2 mb-3 border rounded-lg"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          className="w-full p-2 mb-4 border rounded-lg"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button
-          onClick={handleLogin}
-          className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition"
-        >
-          Login
-        </button>
+
+        <div className="space-y-6">
+          <div>
+            <label htmlFor="username" className="block text-purple-900 font-medium">Username</label>
+            <input
+              type="text"
+              id="username"
+              className="w-full px-4 py-3 border-2 border-pink-400 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 shadow-md"
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Enter (berna) "
+            />
+          </div>
+
+          <div>
+            <label htmlFor="password" className="block text-purple-900 font-medium">Password</label>
+            <input
+              type="password"
+              id="password"
+              className="w-full px-4 py-3 border-2 border-pink-400 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500 shadow-md"
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter (143)"
+            />
+          </div>
+
+          <button
+            type="button"
+            onClick={handleLogin}
+            className="w-full py-3 bg-purple-600 text-white rounded-xl shadow-lg hover:bg-purple-700 transition-all duration-300 border-2 border-pink-400 font-bold text-lg"
+          >
+            LOGIN
+          </button>
+        </div>
       </div>
     </div>
   );
