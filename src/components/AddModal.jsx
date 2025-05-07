@@ -55,16 +55,20 @@ export default function AddModal({ hide, onTaskAdded }) {
     };
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-purple-900/30">
-            <div className="relative w-full max-w-md p-6 bg-gradient-to-br from-purple-100 to-purple-200 rounded-2xl shadow-2xl border-4 border-pink-400 max-h-[90vh] overflow-hidden">
+        <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-purple-900/30 p-4">
+            <div className="relative w-full max-w-md p-4 sm:p-6 bg-gradient-to-br from-purple-100 to-purple-200 rounded-2xl shadow-2xl border-2 sm:border-4 border-pink-400 max-h-[90vh] overflow-hidden">
                 {/* Header */}
-                <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-2xl font-semibold text-purple-900 font-[\'Parisienne\'] drop-shadow-lg">
+                <div className="flex items-center justify-between mb-3 sm:mb-4">
+                    <h3 className="text-xl sm:text-2xl font-semibold text-purple-900 font-['Parisienne'] drop-shadow-lg">
                         Add New Task
                     </h3>
-                    <button onClick={hide} className="text-pink-500 hover:text-purple-700 transition">
+                    <button 
+                        onClick={hide} 
+                        className="text-pink-500 hover:text-purple-700 transition"
+                        aria-label="Close modal"
+                    >
                         <svg
-                            className="h-6 w-6"
+                            className="h-5 w-5 sm:h-6 sm:w-6"
                             xmlns="http://www.w3.org/2000/svg"
                             fill="none"
                             viewBox="0 0 24 24"
@@ -76,24 +80,24 @@ export default function AddModal({ hide, onTaskAdded }) {
                     </button>
                 </div>
 
-                <div className="space-y-4 overflow-hidden">
+                <div className="space-y-3 sm:space-y-4 overflow-hidden">
                     {/* Task Title Input */}
                     <div>
-                        <label className="block text-lg font-medium text-purple-800 font-[\'Playfair Display\']">
+                        <label className="block text-base sm:text-lg font-medium text-purple-800 font-['Playfair Display']">
                             Task Title
                         </label>
                         <input
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
                             type="text"
-                            className="mt-1 p-3 border-2 border-pink-400 rounded-xl w-full shadow-md focus:outline-none focus:ring-2 focus:ring-purple-400 font-[\'Playfair Display\']"
+                            className="mt-1 p-2 sm:p-3 border-2 border-pink-400 rounded-xl w-full shadow-md focus:outline-none focus:ring-2 focus:ring-purple-400 font-['Playfair Display']"
                             placeholder="Enter your task title..."
                         />
                     </div>
 
                     {/* Scrollable Task List */}
-                    <div className="mt-3 max-h-[250px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-pink-400 scrollbar-track-purple-100">
-                        <label className="block text-lg font-medium text-purple-800 font-[\'Playfair Display\']">
+                    <div className="mt-2 sm:mt-3 max-h-[150px] sm:max-h-[250px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-pink-400 scrollbar-track-purple-100">
+                        <label className="block text-base sm:text-lg font-medium text-purple-800 font-['Playfair Display']">
                             Task List
                         </label>
                         <div className="space-y-2">
@@ -107,12 +111,12 @@ export default function AddModal({ hide, onTaskAdded }) {
                                             updatedTasks[index] = e.target.value;
                                             setTasks(updatedTasks);
                                         }}
-                                        className="p-3 border-2 border-pink-400 rounded-xl w-full shadow-md font-[\'Playfair Display\']"
+                                        className="p-2 sm:p-3 border-2 border-pink-400 rounded-xl w-full shadow-md font-['Playfair Display'] text-sm sm:text-base"
                                         placeholder={`Task ${index + 1}...`}
                                     />
                                     <button
                                         onClick={() => removeTask(index)}
-                                        className="px-3 py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-600 transition shadow-md"
+                                        className="px-2 py-1 sm:px-3 sm:py-2 bg-pink-500 text-white rounded-lg hover:bg-pink-600 transition shadow-md text-sm sm:text-base"
                                     >
                                         Delete
                                     </button>
@@ -122,16 +126,16 @@ export default function AddModal({ hide, onTaskAdded }) {
                     </div>
 
                     {/* Buttons - Centered & Same Style */}
-                    <div className="flex justify-center mt-6 space-x-4">
+                    <div className="flex justify-center mt-4 sm:mt-6 space-x-2 sm:space-x-4">
                         <button
                             onClick={addTask}
-                            className="px-5 py-3 rounded-xl bg-purple-500 text-white border-2 border-pink-400 shadow-lg hover:bg-purple-600 transition"
+                            className="px-3 py-2 sm:px-5 sm:py-3 rounded-xl bg-purple-500 text-white border-2 border-pink-400 shadow-lg hover:bg-purple-600 transition text-sm sm:text-base"
                         >
                             Add Task
                         </button>
                         <button
                             onClick={saveTasks}
-                            className={`px-5 py-3 rounded-xl bg-purple-500 text-white border-2 border-pink-400 shadow-lg hover:bg-purple-600 transition ${
+                            className={`px-3 py-2 sm:px-5 sm:py-3 rounded-xl bg-purple-500 text-white border-2 border-pink-400 shadow-lg hover:bg-purple-600 transition text-sm sm:text-base ${
                                 loading ? "opacity-50 cursor-not-allowed" : ""
                             }`}
                             disabled={loading}
